@@ -32,5 +32,8 @@ func (h *userGroupApi) ListUserGroupApi() fiber.Handler {
 		return c.JSON(fiber.Map{
 			"data": data,
 		})
+
+
+		
 	}
 }
