@@ -1,0 +1,19 @@
+.verti-sitemap .first-list .list-wrap .wrap-item {
+    position: relative;
+    padding: 10px 16px 4px 36px;
+}
+
+.verti-sitemap .first-list .list-wrap .wrap-item::before, .verti-sitemap .first-list li .wrap-item::before {
+    content: "";
+    width: 24px;
+    border-top: 2px dashed var(--vz-border-color);
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+}
+
+.wrap-item .choices {
+    margin-bottom: 0;
+}

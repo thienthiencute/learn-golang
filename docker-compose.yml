@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  db:
+    container_name: 'postgres-gocas'
+    image: postgres:18.3
+    ports:
+      - '$POSTGRES_PORT:5432'  
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASS
+      POSTGRES_DB: $POSTGRES_DATABASE
+      POSTGRES_PORT: $POSTGRES_PORT
+      POSTGRES_HOST: $POSTGRES_HOST
+      POSTGRES_SSLMODE: disable
+    volumes:
+      - ./docker/postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    container_name: 'redis-gocas'
+    image: redis:8.6.1
+    volumes:
+      - ./docker/redis:/etc/redis
+    command: [ 'redis-server', '/etc/redis/redis.conf' ]
+    ports:
+      - '${REDIS_PORT}:6379'

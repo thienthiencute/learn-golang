@@ -1,0 +1,21 @@
+
+/*# sourceMappingURL=custom.min.css.map */
+.offcanvas, .offcanvas-lg, .offcanvas-md, .offcanvas-sm, .offcanvas-xl, .offcanvas-xxl{
+    --vz-offcanvas-width:50%;
+}
+@media (max-width: 678px) {
+    .offcanvas, .offcanvas-lg, .offcanvas-md, .offcanvas-sm, .offcanvas-xl, .offcanvas-xxl{
+        --vz-offcanvas-width:90%;
+    }
+}
+
+.lefticon-accordion .accordion-button::after {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lefticon-accordion .accordion-button:not(.collapsed)::after {
+    top: 50%;
+}

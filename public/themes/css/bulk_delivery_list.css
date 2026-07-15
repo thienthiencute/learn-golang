@@ -1,0 +1,15 @@
+.shipping-card {
+    height: 100%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.shipping-card:hover {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.is-selected {
+    border: 1px solid #2463eb;
+    border-color: #2463eb;
+    background-color: #f0f6ff;
+}

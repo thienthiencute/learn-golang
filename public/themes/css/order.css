@@ -1,0 +1,243 @@
+/* ==========================================================================
+   Filter Tags
+   ========================================================================== */
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    /* margin-right: 0.5rem;
+    margin-bottom: 0.25rem; */
+}
+
+.filter-tag .remove-filter {
+    background: none;
+    border: none;
+    color: #1976d2;
+    margin-left: 0.5rem;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.filter-tag .remove-filter:hover {
+    background-color: rgba(25, 118, 210, 0.1);
+}
+
+.filter-preview-tag {
+    display: inline-block;
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+    border: 1px solid #dee2e6;
+}
+
+/* ==========================================================================
+   Filter Dropdown Styles
+   ========================================================================== */
+
+.omni-popover-body {
+    border: 1px solid #e9ecef;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.omni-selection {
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.omni-selection:hover {
+    border-color: #86b7fe;
+}
+
+.omni-selection .selection-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.omni-selection .selection-value {
+    flex: 1;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+}
+
+.omni-selection .selection-icon {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+/* Selection dropdown styles */
+.selection-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    z-index: 1000;
+    margin-top: 2px;
+    overflow-y: auto;
+    max-height: 180px;
+    scroll-behavior: smooth;
+}
+
+.selection-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.selection-option:hover {
+    background-color: #f8f9fa;
+}
+
+.selection-option.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+/* Dropdown items styling */
+.selection-item {
+    cursor: pointer !important;
+    padding: 0.5rem 0.75rem;
+    transition: background-color 0.2s;
+    user-select: none;
+    pointer-events: auto !important;
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    margin: 0;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.selection-item:hover {
+    background-color: #f8f9fa !important;
+}
+
+.selection-item.active {
+    background-color: #e3f2fd !important;
+    color: #1976d2 !important;
+}
+
+.selection-item * {
+    pointer-events: none !important;
+}
+
+/* Fix first item in dropdown */
+.selection-item:first-child {
+    margin-top: 0;
+    border-top: none;
+}
+
+/* Ensure dropdown content is scrollable */
+.selection-dropdown .selection-item {
+    flex-shrink: 0;
+}
+
+.selection-dropdown {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    z-index: 9999 !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+    /* Improve scrolling behavior */
+    scroll-behavior: smooth;
+    /* Ensure first item is accessible */
+    padding: 0;
+}
+
+.omni-selection {
+    position: relative;
+}
+
+/* Fix dropdown positioning - center instead of left align */
+.dropdown-menu .omni-selection .selection-dropdown {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    min-width: 200px;
+}
+
+/* Alternative positioning for better alignment */
+.omni-popover-body .selection-dropdown {
+    left: 0 !important;
+    right: 0 !important;
+    transform: none;
+}
+
+/* Ensure dropdown is above other elements */
+.dropdown-menu {
+    z-index: 9998 !important;
+    /* Ensure dropdown menu can scroll if needed */
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.omni-popover-body {
+    z-index: 9998 !important;
+    /* Ensure popover body can scroll */
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Fix for Bootstrap dropdown conflicts */
+.dropdown-menu .selection-dropdown {
+    position: relative !important;
+    z-index: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin-top: 0 !important;
+    /* Ensure scrolling works inside dropdown menu */
+    max-height: 180px !important;
+    overflow-y: auto !important;
+}
+
+/* Specific fix for filter dropdown */
+#filterDropdown+.dropdown-menu {
+    max-height: 500px;
+    overflow-y: auto;
+    /* Ensure proper scrolling behavior */
+    scroll-behavior: smooth;
+}
+
+/* Fix for selection dropdown inside filter */
+#filterDropdown+.dropdown-menu .selection-dropdown {
+    max-height: 150px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.flatpickr-calendar {
+    z-index: 9999 !important;
+}

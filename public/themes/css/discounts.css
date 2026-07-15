@@ -1,0 +1,795 @@
+/**
+ * Discounts Management CSS
+ * Styles for discount list page, filters, modals, and tables
+ */
+
+/* ==========================================================================
+   Base Discount Styles
+   ========================================================================== */
+
+.discount-code {
+    font-weight: 600;
+    color: #405189;
+}
+
+.discount-description {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.usage-count {
+    font-weight: 600;
+    color: #0ab39c;
+}
+
+.table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Filter Dropdown Styles
+   ========================================================================== */
+
+.omni-popover-body {
+    border: 1px solid #e9ecef;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.omni-selection {
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.omni-selection:hover {
+    border-color: #86b7fe;
+}
+
+.omni-selection .selection-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.omni-selection .selection-value {
+    flex: 1;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+}
+
+.omni-selection .selection-icon {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+/* Selection dropdown styles */
+.selection-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    z-index: 1000;
+    margin-top: 2px;
+    overflow-y: auto;
+    max-height: 180px;
+    scroll-behavior: smooth;
+}
+
+.selection-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.selection-option:hover {
+    background-color: #f8f9fa;
+}
+
+.selection-option.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+/* Dropdown items styling */
+.selection-item {
+    cursor: pointer !important;
+    padding: 0.5rem 0.75rem;
+    transition: background-color 0.2s;
+    user-select: none;
+    pointer-events: auto !important;
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    margin: 0;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.selection-item:hover {
+    background-color: #f8f9fa !important;
+}
+
+.selection-item.active {
+    background-color: #e3f2fd !important;
+    color: #1976d2 !important;
+}
+
+.selection-item * {
+    pointer-events: none !important;
+}
+
+/* Fix first item in dropdown */
+.selection-item:first-child {
+    margin-top: 0;
+    border-top: none;
+}
+
+/* Ensure dropdown content is scrollable */
+.selection-dropdown .selection-item {
+    flex-shrink: 0;
+}
+
+.selection-dropdown {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    z-index: 9999 !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+    /* Improve scrolling behavior */
+    scroll-behavior: smooth;
+    /* Ensure first item is accessible */
+    padding: 0;
+}
+
+.omni-selection {
+    position: relative;
+}
+
+/* Fix dropdown positioning - center instead of left align */
+.dropdown-menu .omni-selection .selection-dropdown {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    min-width: 200px;
+}
+
+/* Alternative positioning for better alignment */
+.omni-popover-body .selection-dropdown {
+    left: 0 !important;
+    right: 0 !important;
+    transform: none;
+}
+
+/* Ensure dropdown is above other elements */
+.dropdown-menu {
+    z-index: 9998 !important;
+    /* Ensure dropdown menu can scroll if needed */
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.omni-popover-body {
+    z-index: 9998 !important;
+    /* Ensure popover body can scroll */
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Fix for Bootstrap dropdown conflicts */
+.dropdown-menu .selection-dropdown {
+    position: relative !important;
+    z-index: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin-top: 0 !important;
+    /* Ensure scrolling works inside dropdown menu */
+    max-height: 180px !important;
+    overflow-y: auto !important;
+}
+
+/* Specific fix for filter dropdown */
+#filterDropdown+.dropdown-menu {
+    max-height: 500px;
+    overflow-y: auto;
+    /* Ensure proper scrolling behavior */
+    scroll-behavior: smooth;
+}
+
+/* Fix for selection dropdown inside filter */
+#filterDropdown+.dropdown-menu .selection-dropdown {
+    max-height: 150px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* ==========================================================================
+   DataTable Overrides
+   ========================================================================== */
+
+/* Hide DataTable built-in search box */
+/* .dataTables_filter {
+    display: none !important;
+} */
+
+/* Hide DataTable info and pagination */
+/* .dataTables_info,
+.dataTables_paginate,
+.dataTables_length {
+    display: none !important;
+} */
+
+/* ==========================================================================
+   Filter Tags
+   ========================================================================== */
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.filter-tag .remove-filter {
+    background: none;
+    border: none;
+    color: #1976d2;
+    margin-left: 0.5rem;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.filter-tag .remove-filter:hover {
+    background-color: rgba(25, 118, 210, 0.1);
+}
+
+.filter-preview-tag {
+    display: inline-block;
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+    border: 1px solid #dee2e6;
+}
+
+/* ==========================================================================
+   Modal Styles
+   ========================================================================== */
+
+/* Promotion modal styling */
+.promotion-option {
+    transition: background-color 0.2s ease;
+}
+
+.promotion-option:hover {
+    background-color: #f8f9fa !important;
+}
+
+.promotion-option:hover .text-dark {
+    color: #495057 !important;
+}
+
+/* Modal styling improvements */
+#createPromotionModal .modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+#createPromotionModal .modal-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px 24px 16px 24px;
+}
+
+#createPromotionModal .modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+
+
+/* ==========================================================================
+   Discount Type Dropdown Styles
+   ========================================================================== */
+
+/* Discount type dropdown button styling */
+#discountTypeDropdown {
+    min-height: 48px;
+    padding: 0.75rem;
+}
+
+#discountTypeDropdown #selectedDiscountType {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+#discountTypeDropdown #selectedDiscountType .me-3 {
+    margin-right: 0.75rem !important;
+    flex-shrink: 0;
+}
+
+#discountTypeDropdown #selectedDiscountType span {
+    font-weight: 500;
+}
+
+/* Dropdown menu items styling */
+.discount-type-dropdown .dropdown-item {
+    padding: 0.75rem 1rem;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.discount-type-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.discount-type-dropdown .dropdown-item .me-3 {
+    margin-right: 0.75rem !important;
+    flex-shrink: 0;
+}
+
+/* Discount details sections */
+.discount-details {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.discount-details h6 {
+    color: #495057;
+    margin-bottom: 0.75rem;
+}
+
+.discount-details .form-check {
+    margin-bottom: 0.5rem;
+}
+
+.discount-details .form-check-label {
+    font-weight: 400;
+    color: #6c757d;
+}
+
+/* Weekly schedule styling */
+#weeklyScheduleContainer {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef !important;
+}
+
+#weeklyScheduleContainer .form-check {
+    margin-bottom: 0;
+}
+
+#weeklyScheduleContainer .form-check-label {
+    font-weight: 500;
+    color: #495057;
+    min-width: 80px;
+}
+
+.time-range-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time-range-controls .form-select {
+    width: 80px;
+    font-size: 0.875rem;
+}
+
+.time-range-controls .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Day checkbox styling */
+.day-checkbox-container {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.day-checkbox-container:hover {
+    background-color: #f8f9fa;
+}
+
+.day-checkbox-container:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.day-checkbox-container .form-check {
+    min-width: 120px;
+    margin-right: 16px;
+}
+
+.day-status {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 8px;
+}
+
+.day-status .text-muted {
+    font-size: 13px;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.day-status .choose-time-link {
+    font-size: 13px;
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.day-status .choose-time-link:hover {
+    background-color: #e7f1ff;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   Time Range Styling
+   ========================================================================== */
+
+/* Time range container styling */
+.time-range-container {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+}
+
+.time-range-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.time-range-row:last-child {
+    margin-bottom: 0;
+}
+
+.time-select {
+    width: 120px;
+    font-size: 13px;
+    min-width: 120px;
+}
+
+.time-range-description {
+    font-size: 12px;
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.btn-time-action {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-time-action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.choose-time-link {
+    color: #0d6efd;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.choose-time-link:hover {
+    text-decoration: underline;
+}
+
+/* Summary section styling */
+.discount-summary {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.summary-section {
+    margin-bottom: 15px;
+}
+
+.summary-section h6 {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.summary-content {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.summary-content.empty {
+    font-style: italic;
+    color: #adb5bd;
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+.btn-hover-oapcity:hover {
+    opacity: 0.8;
+}
+
+/* Date picker positioning */
+.input-date-picker {
+    position: relative;
+}
+
+/* ==========================================================================
+   Choices.js Styling for Time Select Elements
+   ========================================================================== */
+
+.create-discount-page .time-select+.choices .choices__list--dropdown {
+    max-height: 200px !important;
+    overflow-y: auto !important;
+}
+
+.create-discount-page .time-select+.choices {
+    width: 120px !important;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.create-discount-page .time-select+.choices .choices__inner {
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.create-discount-page .time-select+.choices .choices__inner:focus-within {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.create-discount-page .time-select+.choices .choices__item--choice {
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.create-discount-page .time-select+.choices .choices__item--choice:last-child {
+    border-bottom: none;
+}
+
+.create-discount-page .time-select+.choices .choices__list--dropdown {
+    width: 120px !important;
+    min-width: 120px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-discount-page .time-select+.choices .choices__list--dropdown .choices__item--choice:hover {
+    background-color: #f8f9fa;
+}
+
+.create-discount-page .time-select+.choices .choices__list--dropdown .choices__item--choice.is-highlighted {
+    background-color: #e9ecef;
+}
+
+.create-discount-page .time-select+.choices .choices__list--dropdown {
+    z-index: 1000;
+}
+
+.create-discount-page .time-select+.choices .choices__list--dropdown {
+    scroll-behavior: smooth;
+}
+
+.time-range-row .form-check {
+    min-width: 100px;
+    margin-right: 0;
+    flex-shrink: 0;
+}
+
+.time-range-row .form-check-label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 13px;
+}
+
+.time-range-row .me-2:not(.form-check):not(.choices) {
+    font-weight: 600;
+    color: #6c757d;
+    margin: 0 8px;
+    flex-shrink: 0;
+}
+
+.time-range-row .btn-time-action {
+    margin-left: 4px;
+}
+
+.time-range-row .btn-time-action:first-of-type {
+    margin-left: 8px;
+}
+
+.time-range-row>.choices {
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments for time range */
+@media (max-width: 768px) {
+    .time-range-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .create-discount-page .time-select+.choices {
+        width: 100px !important;
+        min-width: 100px;
+    }
+
+    .create-discount-page .time-select+.choices .choices__list--dropdown {
+        width: 100px !important;
+        min-width: 100px;
+    }
+}
+
+/* Fallback styling for native select elements when choices.js fails */
+.create-discount-page .time-select:not(.choices__input) {
+    width: 120px;
+    min-width: 120px;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px 12px;
+    appearance: none;
+}
+
+.create-discount-page .time-select:not(.choices__input):focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    outline: 0;
+}
+
+/* Tab close button styling */
+.nav-tabs .btn-close {
+    font-size: 0.75rem;
+    padding: 0;
+    width: 1em;
+    height: 1em;
+    opacity: 0.6;
+}
+
+.nav-tabs .btn-close:hover {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Summary Section Styling
+   ========================================================================== */
+
+/* Increase font size for summary content */
+.summary-content {
+    font-size: 1rem !important;
+}
+
+.summary-content h6 {
+    font-size: 1.1rem !important;
+    font-weight: 600;
+}
+
+.summary-content .fw-medium {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+}
+
+.summary-content .text-muted {
+    font-size: 1rem !important;
+}
+
+.summary-content ul li {
+    font-size: 1rem !important;
+    line-height: 1.5;
+}
+
+.summary-content p {
+    font-size: 1rem !important;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .omni-popover-body {
+        min-width: 280px !important;
+    }
+
+    .selection-dropdown {
+        max-height: 150px;
+    }
+
+    .filter-tag {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .summary-content {
+        font-size: 0.95rem !important;
+    }
+
+    .summary-content h6 {
+        font-size: 1.05rem !important;
+    }
+}

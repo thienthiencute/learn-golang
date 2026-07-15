@@ -1,0 +1,71 @@
+package layouts
+
+import(
+    "gocas/pkg/golangviet/templates"
+)
+templ Master(head *[]templ.Component, script ...templ.Component){
+    <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="sm-hover" data-sidebar-image="none" data-preloader="disable">
+        <head>
+            <meta charset="UTF-8">
+            <title>Maybi E-commerce</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href={templates.AssetURL("/static/images/fav.png")} type="image/x-icon">
+            // <meta name="api-base-url" content={templates.AssetURL("/")}>
+
+            <!-- Libraries -->
+            <script src={templates.AssetURL("/static/themes/js/layout.js")}></script>
+            <link href={templates.AssetURL("/static/themes/css/bootstrap.min.css")} rel="stylesheet" type="text/css" />
+            <link href={templates.AssetURL("/static/themes/css/icons.min.css")} rel="stylesheet" type="text/css" />
+            <link href={templates.AssetURL("/static/themes/libs/sweetalert2/sweetalert2.min.css")} rel="stylesheet" type="text/css" /> 
+            if head != nil && len(*head) > 0 {
+                for _, item := range *head{
+                    @item
+                }
+            }
+            <link href={templates.AssetURL("/static/themes/css/app.min.css")} rel="stylesheet" type="text/css" />           
+            <link href={templates.AssetURL("/static/themes/css/style.css")} rel="stylesheet" type="text/css" />
+            <link href={templates.AssetURL("/static/themes/css/custom.css")} rel="stylesheet" type="text/css" />
+            <link href={templates.AssetURL("/static/themes/css/custom.min.css")} rel="stylesheet" type="text/css" />
+        </head>
+        <body>
+            <div id="layout-wrapper">
+
+                @Header()
+                @Sidebar()
+
+                <div class="main-content">
+                        <div class="page-content">
+                            <div class="container-fluid" id="main_wasm">
+                                { children... }
+                            </div>
+                    </div>
+                </div>
+
+                @Footer()
+            </div>
+            
+            // @Customizer()
+            <script src={templates.AssetURL("/static/themes/js/jquery-3.7.0.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/bootstrap/js/bootstrap.bundle.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/simplebar/simplebar.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/node-waves/waves.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/feather-icons/feather.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/js/pages/plugins/lord-icon-2.1.0.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/toastify/toastify-js.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/choices.js/public/assets/scripts/choices.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/libs/sweetalert2/sweetalert2.min.js")}></script>
+            <script src={templates.AssetURL("/static/themes/js/pages/sweetalerts.init.js")}></script>
+            <script src={templates.AssetURL("/static/htmx/htmx.min.js")}></script>
+            <script type="module" src={templates.AssetURL("/static/js/common/sidebar-navigation.js")}></script>
+            <script src={templates.AssetURL("/static/themes/js/app.js")}></script>
+            <script src={templates.AssetURL("/static/js/common/utils.js")}></script>
+
+            if script != nil && len(script) > 0 {
+                for _, js := range script {
+                    @js
+                }
+            }
+
+        </body>
+    </html>
+}

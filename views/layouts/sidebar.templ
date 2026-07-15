@@ -1,0 +1,63 @@
+package layouts
+
+import "gocas/pkg/golangviet/templates"
+
+templ Sidebar() {
+	<div class="app-menu navbar-menu">
+		<div class="navbar-brand-box">
+			<a href={ templates.SafeURL("") } class="logo logo-dark">
+				<span class="logo-sm">
+					<img src={ templates.AssetURL("/static/images/fav.png") } alt="" height="50"/>
+				</span>
+				<span class="logo-lg">
+					<img src={ templates.AssetURL("/static/images/logo.png") } alt="" height="50"/>
+				</span>
+			</a>
+			<a href={ templates.SafeURL("") } class="logo logo-light">
+				<span class="logo-sm">
+					<img src={ templates.AssetURL("/static/images/fav.png") } alt="" height="50"/>
+				</span>
+				<span class="logo-lg">
+					<img src={ templates.AssetURL("/static/images/logo.png") } alt="" height="50"/>
+				</span>
+			</a>
+			<button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+				<i class="ri-record-circle-line"></i>
+			</button>
+		</div>
+		<div id="scrollbar">
+			<div class="container-fluid">
+				<div id="two-column-menu"></div>
+				<ul class="navbar-nav" id="navbar-nav">
+					<li class="menu-title"><span data-key="t-menu">Menu</span></li>
+					<li class="nav-item">
+						<a class="nav-link menu-link" href={ templates.SafeURL("") } role="button" aria-expanded="false">
+							<i class="las la-tachometer-alt"></i> <span data-key="t-dashboard">Dashboard</span>
+						</a>
+					</li>
+					<li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-admin">Admin</span></li>
+					<li class="nav-item">
+						<a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="sidebarAuth">
+							<i class="ri-account-circle-line"></i> <span data-key="t-authentication">Authentication</span>
+						</a>
+						<div class="menu-dropdown collapse" id="sidebarAuth" style="">
+							<ul class="nav nav-sm flex-column">
+								<li class="nav-item">
+									<a href={ templates.SafeURL("/admins/users/list") } class="nav-link" data-key="t-users">Users </a>
+								</li>
+								<li class="nav-item">
+									<a href={ templates.SafeURL("/admins/roles/list") } class="nav-link" data-key="t-roles">Roles </a>
+								</li>
+								<li class="nav-item">
+									<a href={ templates.SafeURL("/admins/permissions/list") } class="nav-link" data-key="t-permissions">Permissions </a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="sidebar-background"></div>
+	</div>
+	<div class="vertical-overlay"></div>
+}
