@@ -9,6 +9,7 @@ import (
 
 type composerUserGroupHdl interface {
 	ListUserGroupHdl() fiber.Handler
+	UpdateUserGroupHdl() fiber.Handler
 }
 
 func ComposerUserGroupHdlService(serviceCtx gosctx.ServiceContext) composerUserGroupHdl {

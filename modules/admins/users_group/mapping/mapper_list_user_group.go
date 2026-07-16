@@ -28,8 +28,8 @@ func MapperListUserGroup(data *[]entity.UserGroup) *[]responses.UserGroupResp {
 			Description: userGroup.Description,
 			Status:      status,
 			Custom: `
-                        <button class="btn btn-sm btn-info edit-btn" data-id="` + str + `">Edit</button>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="` + str + `">Delete</button>
+                        <a href="/admins/users-group/update/` + str + `" class="btn btn-sm btn-info edit-btn">Sửa</a>
+                        <button class="btn btn-sm btn-danger delete-btn" data-id="` + str + `">Xóa</button>
                     `,
 		})
 

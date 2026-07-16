@@ -9,7 +9,8 @@ bin/
 .idea/*
 
 logs/*
-*.log
+
+docker/*
 
 *_templ.go
 tmp

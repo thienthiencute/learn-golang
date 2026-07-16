@@ -12,13 +12,21 @@ func SetupRoutesUserGroup(app *fiber.App, serviceCtx gosctx.ServiceContext) {
 	{
 		comp := composers.ComposerUserGroupHdlService(serviceCtx)
 		groupHdl.Get("/list", comp.ListUserGroupHdl()).Name("ecommerce.users_group.list")
+		groupHdl.Get("/update/:id", comp.UpdateUserGroupHdl()).Name("ecommerce.users_group.update")
 	}
 
 	groupApi := app.Group("/api/admins/users-group")
 	{
 		comp := composers.ComposerUserGroupApiService(serviceCtx)
 		groupApi.Post("/list", comp.ListUserGroupApi()).Name("ecommerce.users_group.api.list")
+		groupApi.Post("/create", comp.CreateUserGroupApi()).Name("ecommerce.users_group.api.create")
+		groupApi.Post("/update", comp.UpdateUserGroupApi()).Name("ecommerce.users_group.api.update")
+		groupApi.Get("/detail/:id", comp.DetailUserGroupApi()).Name("ecommerce.users_group.api.detail")
 	}
 }
 
-//
+//Repo -> UseCase -> API -> Composer -> Router
+
+
+
+

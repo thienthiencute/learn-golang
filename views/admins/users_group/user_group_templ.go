@@ -59,7 +59,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" style=\"min-height: 200px;width:100%\"><thead class=\"table-light text-muted\"><tr class=\"text-uppercase\"><th>ID</th><th>Name</th><th>Description</th><th>Status</th><th>Action</th></tr></thead></table></div></div></div></div></div></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" style=\"min-height: 200px;width:100%\"><thead class=\"table-light text-muted\"><tr class=\"text-uppercase\"><th>ID</th><th>Name</th><th>Description</th><th>Status</th><th>Action</th></tr></thead></table></div></div></div></div></div></div></div><!-- Modal --> <div class=\"modal fade\" id=\"create_user_group_modal\" tabindex=\"-1\" aria-labelledby=\"create_user_group_modal_label\" aria-hidden=\"true\"><div class=\"modal-dialog modal-dialog-centered\"><div class=\"modal-content border-0\"><div class=\"modal-header bg-soft-info p-3\"><h5 class=\"modal-title\" id=\"create_user_group_modal_label\" data-key=\"t-add-user-group\">Thêm nhóm người dùng</h5><button type=\"button\" class=\"btn-close close-modal\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button></div><form class=\"tablelist-form\" id=\"create_user_group_form\" autocomplete=\"off\"><div class=\"modal-body\"><div class=\"row g-3\"><div class=\"col-lg-12\"><div><label for=\"groupName\" class=\"form-label\"><span data-key=\"t-name\">Tên nhóm</span> <span class=\"text-danger\">*</span></label> <input type=\"text\" class=\"form-control\" id=\"groupName\" name=\"name\" required placeholder=\"Nhập tên nhóm\"></div></div><div class=\"col-lg-12\"><div><label for=\"groupDesc\" class=\"form-label\"><span data-key=\"t-description\">Mô tả</span></label> <textarea class=\"form-control\" id=\"groupDesc\" name=\"description\" placeholder=\"Nhập mô tả\"></textarea></div></div></div></div><div class=\"modal-footer\" style=\"display: block;\"><div class=\"hstack gap-2 justify-content-end\"><button type=\"button\" class=\"btn btn-light close-modal\" data-bs-dismiss=\"modal\" data-key=\"t-close\">Đóng</button> <button type=\"button\" class=\"btn btn-success\" id=\"save_user_group_btn\" data-key=\"t-submit-create\">Xác nhận</button></div></div></form></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -101,7 +101,7 @@ func head() templ.Component {
 		var templ_7745c5c3_Var5 templ.SafeURL
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinURLErrs(templates.AssetURL("/static/themes/libs/datatables/datatables.min.css"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/admins/users_group/user_group.templ`, Line: 68, Col: 101}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/admins/users_group/user_group.templ`, Line: 104, Col: 101}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -143,7 +143,7 @@ func scriptSlot() templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/datatables/datatables.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/admins/users_group/user_group.templ`, Line: 72, Col: 107}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/admins/users_group/user_group.templ`, Line: 108, Col: 107}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
@@ -156,7 +156,7 @@ func scriptSlot() templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/js/admins/users_group/list.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/admins/users_group/user_group.templ`, Line: 73, Col: 96}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/admins/users_group/user_group.templ`, Line: 109, Col: 96}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {

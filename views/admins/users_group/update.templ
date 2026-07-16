@@ -1,0 +1,74 @@
+package users_group
+
+import (
+"gocas/views/layouts"
+"gocas/pkg/golangviet/templates"
+)
+
+templ Update(id string){
+@layouts.Master(&[]templ.Component{}, scriptUpdateSlot()){
+<div class="row">
+	<div class="col-12">
+		<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+			<h4 data-key="t-admin">Admin</h4>
+			<div class="page-title-right">
+				<ol class="breadcrumb m-0">
+					<li class="breadcrumb-item"><a href="javascript: void(0);" data-key="t-users-group">Users Group</a></li>
+					<li class="breadcrumb-item active" data-key="t-update">Update</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xxl-9">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header align-items-center d-flex">
+					<h4 class="card-title mb-0 flex-grow-1" data-key="t-update-user-group">Cập nhật nhóm người dùng</h4>
+				</div>
+
+				<div class="card-body">
+					<form id="update_user_group_form">
+						<input type="hidden" id="groupId" name="id" value={id} />
+						<div class="row gy-4">
+							<div class="col-xxl-6 col-md-6">
+								<div>
+									<label for="groupName" class="form-label">Tên nhóm <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="groupName" name="name" required placeholder="Nhập tên nhóm" />
+								</div>
+							</div>
+							<div class="col-xxl-6 col-md-6">
+								<div>
+									<label for="groupStatus" class="form-label">Trạng thái</label>
+									<select class="form-select" id="groupStatus" name="status">
+										<option value="1">Hiện</option>
+										<option value="2">Ẩn</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-xxl-12 col-md-12">
+								<div>
+									<label for="groupDesc" class="form-label">Mô tả</label>
+									<textarea class="form-control" id="groupDesc" name="description" rows="3" placeholder="Nhập mô tả"></textarea>
+								</div>
+							</div>
+							<div class="col-xxl-12 col-md-12 text-end">
+								<a href="/admins/users-group/list" class="btn btn-light" data-key="t-cancel">Hủy</a>
+								<button type="button" class="btn btn-success" id="update_user_group_btn" data-key="t-save">Lưu thay đổi</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+}
+}
+
+templ scriptUpdateSlot(){
+<script type="text/javascript" src={ templates.AssetURL("/static/js/admins/users_group/update.js") } defer></script>
+}
