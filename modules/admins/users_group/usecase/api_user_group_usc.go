@@ -37,11 +37,11 @@ func (u *userGroupApiUsc) ListApiUserGroupUsc() (*[]responses.UserGroupResp, err
 
 }
 
-func (u *userGroupApiUsc) CreateApiUserGroupUsc(name, description string) error {
+func (u *userGroupApiUsc) CreateApiUserGroupUsc(name, description string, status int) error {
 	userGroup := &entity.UserGroup{
 		Name:        name,
 		Description: description,
-		Status:      1, // Active by default
+		Status:      status,
 	}
 
 	err := u.repoApi.CreateUserGroupRepo(userGroup)

@@ -11,7 +11,7 @@ import (
 
 type userGroupUsc interface {
 	ListApiUserGroupUsc() (*[]responses.UserGroupResp, error)
-	CreateApiUserGroupUsc(name, description string) error
+	CreateApiUserGroupUsc(name, description string, status int) error
 	UpdateApiUserGroupUsc(id int64, name, description string, status int) error
 	DetailApiUserGroupUsc(id int64) (*entity.UserGroup, error)
 }
@@ -51,7 +51,7 @@ func (h *userGroupApi) CreateUserGroupApi() fiber.Handler {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Name is required"})
 		}
 
-		err := h.usc.CreateApiUserGroupUsc(req.Name, req.Description)
+		err := h.usc.CreateApiUserGroupUsc(req.Name, req.Description, req.Status)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}

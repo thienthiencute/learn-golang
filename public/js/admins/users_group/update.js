@@ -1,3 +1,5 @@
+import Alert from "../../components/alert.js";
+
 $(document).ready(function () {
     // Fetch data on load
     var groupId = $('#groupId').val();
@@ -9,7 +11,7 @@ $(document).ready(function () {
                 if (response && response.data) {
                     $('#groupName').val(response.data.name);
                     $('#groupDesc').val(response.data.description);
-                    $('#groupStatus').val(response.data.status);
+                    $('#groupStatus').prop('checked', response.data.status === 1);
                 }
             },
             error: function () {
@@ -24,13 +26,13 @@ $(document).ready(function () {
         var formData = {
             id: parseInt($('#groupId').val(), 10),
             name: $('#groupName').val(),
-            status: parseInt($('#groupStatus').val(), 10),
+            status: $('#groupStatus').is(':checked') ? 1 : 2,
             description: $('#groupDesc').val()
         };
 
         // Validate basic required fields
         if (!formData.name) {
-            alert('Name is required!');
+            Alert.error('Name is required!');
             return;
         }
 
@@ -41,33 +43,17 @@ $(document).ready(function () {
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {
-                // Show success message
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'User group updated successfully',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = '/admins/users-group/list';
-                        }
-                    });
-                } else {
-                    alert('User group updated successfully');
-                    window.location.href = '/admins/users-group/list';
-                }
+                Alert.success('User group updated successfully');
+                setTimeout(() => {
+                    location.href = '/admins/users-group/list';
+                }, 1500);
             },
             error: function (xhr, status, error) {
                 var errorMessage = 'An error occurred while updating user group';
                 if (xhr.responseJSON && xhr.responseJSON.error) {
                     errorMessage = xhr.responseJSON.error;
                 }
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire('Error', errorMessage, 'error');
-                } else {
-                    alert(errorMessage);
-                }
+                Alert.error(errorMessage);
             }
         });
     });

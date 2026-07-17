@@ -1,3 +1,5 @@
+import Alert from "../../components/alert.js"
+
 $(document).ready(function () {
     $('#user_group_table').DataTable({
         ajax: {
@@ -36,12 +38,13 @@ $(document).ready(function () {
         // Collect data from the form
         var formData = {
             name: $('#groupName').val(),
-            description: $('#groupDesc').val()
+            description: $('#groupDesc').val(),
+            status: $('#groupStatus').is(':checked') ? 1 : 2
         };
 
         // Validate basic required fields
         if (!formData.name) {
-            alert('Name is required!');
+            Alert.error('Name is required!');
             return;
         }
 
@@ -57,13 +60,7 @@ $(document).ready(function () {
                 $('#create_user_group_form')[0].reset();
 
                 // Show success message
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire('Success', 'User group created successfully', 'success');
-                } else {
-                    alert('User group created successfully');
-                }
-
-                // Reload datatable
+                Alert.success('User group created successfully');
                 $('#user_group_table').DataTable().ajax.reload();
             },
             error: function (xhr, status, error) {
@@ -71,11 +68,7 @@ $(document).ready(function () {
                 if (xhr.responseJSON && xhr.responseJSON.error) {
                     errorMessage = xhr.responseJSON.error;
                 }
-                if (typeof Swal !== 'undefined') {
-                    Swal.fire('Error', errorMessage, 'error');
-                } else {
-                    alert(errorMessage);
-                }
+                Alert.error(errorMessage);
             }
         });
     });

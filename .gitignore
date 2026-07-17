@@ -10,7 +10,14 @@ bin/
 
 logs/*
 
-docker/*
+# PostgreSQL data
+docker/postgres/
+
+# PostgreSQL backup
+docker/postgres_backup/
+
+# Redis data
+docker/redis/
 
 *_templ.go
 tmp

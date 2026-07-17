@@ -40,12 +40,9 @@ templ Update(id string){
 								</div>
 							</div>
 							<div class="col-xxl-6 col-md-6">
-								<div>
-									<label for="groupStatus" class="form-label">Trạng thái</label>
-									<select class="form-select" id="groupStatus" name="status">
-										<option value="1">Hiện</option>
-										<option value="2">Ẩn</option>
-									</select>
+								<div class="form-check form-switch form-switch-right form-switch-md" style="margin-top: 1.8rem;">
+									<label for="groupStatus" class="form-label text-muted">Trạng thái (Hoạt động)</label>
+									<input class="form-check-input code-switcher" type="checkbox" id="groupStatus" name="status">
 								</div>
 							</div>
 							<div class="col-xxl-12 col-md-12">
@@ -70,5 +67,5 @@ templ Update(id string){
 }
 
 templ scriptUpdateSlot(){
-<script type="text/javascript" src={ templates.AssetURL("/static/js/admins/users_group/update.js") } defer></script>
+<script type="module" src={ templates.AssetURL("/static/js/admins/users_group/update.js") } defer></script>
 }
