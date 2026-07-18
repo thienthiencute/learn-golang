@@ -8,7 +8,7 @@ $(document).ready(function () {
         var formData = {
             id: parseInt($('#groupId').val(), 10),
             name: $('#groupName').val(),
-            status: $('#groupStatus').is(':checked') ? 1 : 2,
+            status: parseInt($('input[name="status"]:checked').val(), 10) || 2,
             description: $('#groupDesc').val()
         };
 

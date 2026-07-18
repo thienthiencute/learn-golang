@@ -39,10 +39,17 @@ templ Update(detailUserGroup *entity.UserGroup){
 									<input type="text" class="form-control" id="groupName" name="name" required placeholder="Nhập tên nhóm" value={detailUserGroup.Name} />
 								</div>
 							</div>
-							<div class="col-xxl-6 col-md-6">
-								<div class="form-check form-switch form-switch-right form-switch-md" style="margin-top: 1.8rem;">
-									<label for="groupStatus" class="form-label text-muted">Trạng thái (Hoạt động)</label>
-									<input class="form-check-input code-switcher" type="checkbox" id="groupStatus" name="status" checked?={detailUserGroup.Status == 1} />
+							<div class="col-lg-12">
+								<label class="form-label">Trạng thái <span class="text-danger">*</span></label>
+								<div class="mt-lg-0 mt-2">
+									<div class="form-check form-check-inline form-radio-secondary mb-2">
+										<input class="form-check-input" type="radio" name="status" id="groupStatusActive" value="1" checked?={detailUserGroup.Status == 1} />
+										<label class="form-check-label text-capitalize" for="groupStatusActive" data-key="t-active">Hiện</label>
+									</div>
+									<div class="form-check form-check-inline mb-2">
+										<input class="form-check-input" type="radio" name="status" id="groupStatusInactive" value="2" checked?={detailUserGroup.Status != 1} />
+										<label class="form-check-label text-capitalize" for="groupStatusInactive" data-key="t-inactive">Ẩn</label>
+									</div>
 								</div>
 							</div>
 							<div class="col-xxl-12 col-md-12">
