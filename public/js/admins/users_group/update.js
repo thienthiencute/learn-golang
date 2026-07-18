@@ -1,25 +1,7 @@
 import Alert from "../../components/alert.js";
+import {handleAjaxError} from "/static/js/common/helpers.js"
 
 $(document).ready(function () {
-    // Fetch data on load
-    var groupId = $('#groupId').val();
-    if (groupId) {
-        $.ajax({
-            url: '/api/admins/users-group/detail/' + groupId,
-            type: 'GET',
-            success: function (response) {
-                if (response && response.data) {
-                    $('#groupName').val(response.data.name);
-                    $('#groupDesc').val(response.data.description);
-                    $('#groupStatus').prop('checked', response.data.status === 1);
-                }
-            },
-            error: function () {
-                alert('Failed to load user group details');
-            }
-        });
-    }
-
     // Handle Save button click
     $('#update_user_group_btn').on('click', function () {
         // Collect data from the form
@@ -48,12 +30,8 @@ $(document).ready(function () {
                     location.href = '/admins/users-group/list';
                 }, 1500);
             },
-            error: function (xhr, status, error) {
-                var errorMessage = 'An error occurred while updating user group';
-                if (xhr.responseJSON && xhr.responseJSON.error) {
-                    errorMessage = xhr.responseJSON.error;
-                }
-                Alert.error(errorMessage);
+            error: function (xhr) {
+                  handleAjaxError(xhr)
             }
         });
     });

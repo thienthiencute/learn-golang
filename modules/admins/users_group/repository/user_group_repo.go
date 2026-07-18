@@ -56,3 +56,11 @@ func (s *userGroupRepo) GetUserGroupByIdRepo(id int64) (*entity.UserGroup, error
 	}
 	return &data, nil
 }
+
+func (s *userGroupRepo) DeleteUserGroupRepo(id int64) error {
+	result := s.db.Table(entity.UserGroup{}.TableName()).Unscoped().Where("id = ?", id).Delete(&entity.UserGroup{})
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

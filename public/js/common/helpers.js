@@ -1,10 +1,10 @@
 import Alert from "/static/js/components/alert.js";
 import { getLanguage } from "/static/js/common/inits.js";
-import { multiFilesOpt } from "/static/js/ecommerce/components/multi_files_opt.js";
-import {
-  renderAttachmentItem,
-  getAttachmentType,
-} from "/static/js/ecommerce/components/attachment_renderer.js";
+// import { multiFilesOpt } from "/static/js/ecommerce/components/multi_files_opt.js";
+// import {
+//   renderAttachmentItem,
+//   getAttachmentType,
+// } from "/static/js/ecommerce/components/attachment_renderer.js";
 
 const MAX_IMAGE_COUNT = 3;
 const MAX_VIDEO_COUNT = 1;

@@ -16,6 +16,7 @@ type composerUserGroupApi interface {
 	CreateUserGroupApi() fiber.Handler
 	UpdateUserGroupApi() fiber.Handler
 	DetailUserGroupApi() fiber.Handler
+	DeleteUserGroupApi() fiber.Handler
 }
 
 func ComposerUserGroupApiService(serviceCtx gosctx.ServiceContext) composerUserGroupApi {

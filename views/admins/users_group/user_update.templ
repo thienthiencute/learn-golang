@@ -1,12 +1,13 @@
 package users_group
 
 import (
-"gocas/views/layouts"
-"gocas/pkg/golangviet/templates"
+	"gocas/views/layouts"
+	"gocas/pkg/golangviet/templates"
+	"gocas/modules/admins/users_group/entity"
 )
 
-templ Update(id string){
-@layouts.Master(&[]templ.Component{}, scriptUpdateSlot()){
+templ Update(detailUserGroup *entity.UserGroup){
+	@layouts.Master(&[]templ.Component{}, scriptUpdateSlot()){
 <div class="row">
 	<div class="col-12">
 		<div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -20,7 +21,6 @@ templ Update(id string){
 		</div>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-xxl-9">
 		<div class="col-lg-12">
@@ -31,24 +31,24 @@ templ Update(id string){
 
 				<div class="card-body">
 					<form id="update_user_group_form">
-						<input type="hidden" id="groupId" name="id" value={id} />
+						<input type="hidden" id="groupId" name="id" value={detailUserGroup.ID} />
 						<div class="row gy-4">
 							<div class="col-xxl-6 col-md-6">
 								<div>
 									<label for="groupName" class="form-label">Tên nhóm <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" id="groupName" name="name" required placeholder="Nhập tên nhóm" />
+									<input type="text" class="form-control" id="groupName" name="name" required placeholder="Nhập tên nhóm" value={detailUserGroup.Name} />
 								</div>
 							</div>
 							<div class="col-xxl-6 col-md-6">
 								<div class="form-check form-switch form-switch-right form-switch-md" style="margin-top: 1.8rem;">
 									<label for="groupStatus" class="form-label text-muted">Trạng thái (Hoạt động)</label>
-									<input class="form-check-input code-switcher" type="checkbox" id="groupStatus" name="status">
+									<input class="form-check-input code-switcher" type="checkbox" id="groupStatus" name="status" checked?={detailUserGroup.Status == 1} />
 								</div>
 							</div>
 							<div class="col-xxl-12 col-md-12">
 								<div>
 									<label for="groupDesc" class="form-label">Mô tả</label>
-									<textarea class="form-control" id="groupDesc" name="description" rows="3" placeholder="Nhập mô tả"></textarea>
+									<textarea class="form-control" id="groupDesc" name="description" rows="3" placeholder="Nhập mô tả">{detailUserGroup.Description}</textarea>
 								</div>
 							</div>
 							<div class="col-xxl-12 col-md-12 text-end">
@@ -62,8 +62,7 @@ templ Update(id string){
 		</div>
 	</div>
 </div>
-
-}
+	}
 }
 
 templ scriptUpdateSlot(){

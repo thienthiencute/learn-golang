@@ -7,23 +7,24 @@ import (
 	"gocas/modules/admins/users_group/transport/responses"
 )
 
-type repoApi interface {
+type userGroupApi interface {
 	ListUserGroupRepo() (*[]entity.UserGroup, error)
 	CreateUserGroupRepo(data *entity.UserGroup) error
 	UpdateUserGroupRepo(id int64, data map[string]interface{}) error
 	GetUserGroupByIdRepo(id int64) (*entity.UserGroup, error)
+	DeleteUserGroupRepo(id int64) error
 }
 
 type userGroupApiUsc struct {
-	repoApi repoApi
+	userGroupApi userGroupApi
 }
 
-func NewUserGroupApiUsc(repoApi repoApi) *userGroupApiUsc {
-	return &userGroupApiUsc{repoApi: repoApi}
+func NewUserGroupApiUsc(userGroupApi userGroupApi) *userGroupApiUsc {
+	return &userGroupApiUsc{userGroupApi: userGroupApi}
 }
 
 func (u *userGroupApiUsc) ListApiUserGroupUsc() (*[]responses.UserGroupResp, error) {
-	data, err := u.repoApi.ListUserGroupRepo()
+	data, err := u.userGroupApi.ListUserGroupRepo()
 	if err != nil {
 		if err == errs.ErrRecordNotFound {
 			return nil, nil
@@ -32,7 +33,7 @@ func (u *userGroupApiUsc) ListApiUserGroupUsc() (*[]responses.UserGroupResp, err
 	}
 
 	result := mapping.MapperListUserGroup(data)
-	
+
 	return result, nil
 
 }
@@ -44,7 +45,8 @@ func (u *userGroupApiUsc) CreateApiUserGroupUsc(name, description string, status
 		Status:      status,
 	}
 
-	err := u.repoApi.CreateUserGroupRepo(userGroup)
+	err := u.userGroupApi.CreateUserGroupRepo(userGroup)
+
 	if err != nil {
 		return err
 	}
@@ -59,7 +61,7 @@ func (u *userGroupApiUsc) UpdateApiUserGroupUsc(id int64, name, description stri
 		"status":      status,
 	}
 
-	err := u.repoApi.UpdateUserGroupRepo(id, data)
+	err := u.userGroupApi.UpdateUserGroupRepo(id, data)
 	if err != nil {
 		return err
 	}
@@ -68,7 +70,7 @@ func (u *userGroupApiUsc) UpdateApiUserGroupUsc(id int64, name, description stri
 }
 
 func (u *userGroupApiUsc) DetailApiUserGroupUsc(id int64) (*entity.UserGroup, error) {
-	data, err := u.repoApi.GetUserGroupByIdRepo(id)
+	data, err := u.userGroupApi.GetUserGroupByIdRepo(id)
 	if err != nil {
 		if err == errs.ErrRecordNotFound {
 			return nil, nil
@@ -76,4 +78,12 @@ func (u *userGroupApiUsc) DetailApiUserGroupUsc(id int64) (*entity.UserGroup, er
 		return nil, err
 	}
 	return data, nil
+}
+
+func (u *userGroupApiUsc) DeleteApiUserGroupUsc(id int64) error {
+	err := u.userGroupApi.DeleteUserGroupRepo(id)
+	if err != nil {
+		return err
+	}
+	return nil
 }

@@ -1,4 +1,5 @@
 import Alert from "../../components/alert.js"
+import {handleAjaxError} from "/static/js/common/helpers.js"
 
 $(document).ready(function () {
     $('#user_group_table').DataTable({
@@ -63,12 +64,8 @@ $(document).ready(function () {
                 Alert.success('User group created successfully');
                 $('#user_group_table').DataTable().ajax.reload();
             },
-            error: function (xhr, status, error) {
-                var errorMessage = 'An error occurred while creating user group';
-                if (xhr.responseJSON && xhr.responseJSON.error) {
-                    errorMessage = xhr.responseJSON.error;
-                }
-                Alert.error(errorMessage);
+            error: function (xhr) {
+                handleAjaxError(xhr)
             }
         });
     });

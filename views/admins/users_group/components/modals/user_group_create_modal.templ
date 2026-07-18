@@ -1,0 +1,44 @@
+package modals
+
+templ UserGroupCreateModal() {
+	<div class="modal fade" id="create_user_group_modal" tabindex="-1" aria-labelledby="create_user_group_modal_label" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content border-0">
+				<div class="modal-header bg-soft-info p-3">
+					<h5 class="modal-title" id="create_user_group_modal_label" data-key="t-add-user-group">Thêm nhóm người dùng</h5>
+					<button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<form class="tablelist-form" id="create_user_group_form" autocomplete="off">
+					<div class="modal-body">
+						<div class="row g-3">
+							<div class="col-lg-12">
+								<div>
+									<label for="groupName" class="form-label"><span data-key="t-name">Tên nhóm</span> <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="groupName" name="name" required placeholder="Nhập tên nhóm" />
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div>
+									<label for="groupDesc" class="form-label"><span data-key="t-description">Mô tả</span></label>
+									<textarea class="form-control" id="groupDesc" name="description" placeholder="Nhập mô tả"></textarea>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-check form-switch form-switch-right form-switch-md">
+									<label for="groupStatus" class="form-label text-muted">Trạng thái (Hoạt động)</label>
+									<input class="form-check-input code-switcher" type="checkbox" id="groupStatus" name="status" checked>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="display: block;">
+						<div class="hstack gap-2 justify-content-end">
+							<button type="button" class="btn btn-light close-modal" data-bs-dismiss="modal" data-key="t-close">Đóng</button>
+							<button type="button" class="btn btn-success" id="save_user_group_btn" data-key="t-submit-create">Xác nhận</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+}

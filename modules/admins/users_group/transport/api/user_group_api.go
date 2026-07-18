@@ -1,39 +1,37 @@
 package api
 
 import (
-	"fmt"
 	"gocas/modules/admins/users_group/entity"
 	"gocas/modules/admins/users_group/transport/requests"
 	"gocas/modules/admins/users_group/transport/responses"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/teoit/gosctx/core"
 )
 
-type userGroupUsc interface {
+type userGroupApiUsc interface {
 	ListApiUserGroupUsc() (*[]responses.UserGroupResp, error)
 	CreateApiUserGroupUsc(name, description string, status int) error
 	UpdateApiUserGroupUsc(id int64, name, description string, status int) error
 	DetailApiUserGroupUsc(id int64) (*entity.UserGroup, error)
+	DeleteApiUserGroupUsc(id int64) error
 }
 
 type userGroupApi struct {
-	usc userGroupUsc
+	userGroupApiUsc userGroupApiUsc
 }
 
-func NewUserGroupApi(usc userGroupUsc) *userGroupApi {
-	return &userGroupApi{usc: usc}
+func NewUserGroupApi(userGroupApiUsc userGroupApiUsc) *userGroupApi {
+	return &userGroupApi{userGroupApiUsc: userGroupApiUsc}
 }
 
 func (h *userGroupApi) ListUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		fmt.Println("123")
-		// Gọi UseCase để lấy dữ liệu thực tế từ Database
-		data, err := h.usc.ListApiUserGroupUsc()
+		data, err := h.userGroupApiUsc.ListApiUserGroupUsc()
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
 
-		// Trả về JSON với key "data" cho DataTables
 		return c.JSON(fiber.Map{
 			"data": data,
 		})
@@ -42,16 +40,16 @@ func (h *userGroupApi) ListUserGroupApi() fiber.Handler {
 
 func (h *userGroupApi) CreateUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req requests.CreateUserGroupReq
+		var req requests.UserGroupCreation
 		if err := c.BodyParser(&req); err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
 		}
 
-		if req.Name == "" {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Name is required"})
+		if validationErr := req.Validation(c.Context()); validationErr != nil {
+			return core.ReturnErrsForApi(c, validationErr)
 		}
 
-		err := h.usc.CreateApiUserGroupUsc(req.Name, req.Description, req.Status)
+		err := h.userGroupApiUsc.CreateApiUserGroupUsc(req.Name, req.Description, req.Status)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
@@ -64,19 +62,16 @@ func (h *userGroupApi) CreateUserGroupApi() fiber.Handler {
 
 func (h *userGroupApi) UpdateUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req requests.UpdateUserGroupReq
+		var req requests.UserGroupUpdate
 		if err := c.BodyParser(&req); err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
 		}
 
-		if req.ID == 0 {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "ID is required"})
-		}
-		if req.Name == "" {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Name is required"})
+		if validationErr := req.Validation(c.Context()); validationErr != nil {
+			return core.ReturnErrsForApi(c, validationErr)
 		}
 
-		err := h.usc.UpdateApiUserGroupUsc(req.ID, req.Name, req.Description, req.Status)
+		err := h.userGroupApiUsc.UpdateApiUserGroupUsc(int64(req.ID), req.Name, req.Description, req.Status)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
@@ -89,11 +84,16 @@ func (h *userGroupApi) UpdateUserGroupApi() fiber.Handler {
 
 func (h *userGroupApi) DetailUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		idStr := c.Params("id")
-		var id int64
-		fmt.Sscanf(idStr, "%d", &id)
+		var req requests.UserGroupDetail
+		if err := c.BodyParser(&req); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
+		}
 
-		data, err := h.usc.DetailApiUserGroupUsc(id)
+		if validationErr := req.Validation(c.Context()); validationErr != nil {
+			return core.ReturnErrsForApi(c, validationErr)
+		}
+
+		data, err := h.userGroupApiUsc.DetailApiUserGroupUsc(req.ID)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
@@ -103,6 +103,28 @@ func (h *userGroupApi) DetailUserGroupApi() fiber.Handler {
 
 		return c.JSON(fiber.Map{
 			"data": data,
+		})
+	}
+}
+
+func (h *userGroupApi) DeleteUserGroupApi() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		var req requests.UserGroupDetail
+		if err := c.BodyParser(&req); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
+		}
+
+		if validationErr := req.Validation(c.Context()); validationErr != nil {
+			return core.ReturnErrsForApi(c, validationErr)
+		}
+
+		err := h.userGroupApiUsc.DeleteApiUserGroupUsc(req.ID)
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		}
+
+		return c.JSON(fiber.Map{
+			"message": "User group deleted successfully",
 		})
 	}
 }
