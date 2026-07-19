@@ -6,11 +6,11 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-type UserGroupDetail struct {
+type UserGroupDetailReq struct {
 	ID int64 `json:"id" validate:"required"`
 }
 
-func (req *UserGroupDetail) Validation(ctx context.Context) []*string {
+func (req *UserGroupDetailReq) Validation(ctx context.Context) []*string {
 	validation := validator.New()
 	err := validation.Struct(req)
 	var validationErrors []*string

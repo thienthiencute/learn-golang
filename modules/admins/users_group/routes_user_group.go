@@ -21,7 +21,7 @@ func SetupRoutesUserGroup(app *fiber.App, serviceCtx gosctx.ServiceContext) {
 		groupApi.Post("/list", comp.ListUserGroupApi()).Name("ecommerce.users_group.api.list")
 		groupApi.Post("/create", comp.CreateUserGroupApi()).Name("ecommerce.users_group.api.create")
 		groupApi.Post("/update", comp.UpdateUserGroupApi()).Name("ecommerce.users_group.api.update")
-		groupApi.Post("/delete", comp.DeleteUserGroupApi()).Name("ecommerce.users_group.api.delete")
+		groupApi.Delete("/delete", comp.DeleteUserGroupApi()).Name("ecommerce.users_group.api.delete")
 	}
 }
 

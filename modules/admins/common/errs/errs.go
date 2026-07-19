@@ -11,4 +11,5 @@ var (
 	ErrFirstNameValidate = errors.New("Error validation FirstName")
 	ErrEmailValidate = errors.New("Error validation Email")
 	ErrStatusNotFound = errors.New("Error validation Status")
-)
+	ErrIDUserValidate = errors.New("Error validation ID")
+)

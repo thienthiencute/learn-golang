@@ -4,6 +4,7 @@ import (
 	"gocas/modules/admins/users_group/entity"
 	"gocas/modules/admins/users_group/transport/requests"
 	"gocas/modules/admins/users_group/transport/responses"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/teoit/gosctx/core"
@@ -62,7 +63,7 @@ func (h *userGroupApi) CreateUserGroupApi() fiber.Handler {
 
 func (h *userGroupApi) UpdateUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req requests.UserGroupUpdate
+		var req requests.UserGroupUpdateReq
 		if err := c.BodyParser(&req); err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
 		}
@@ -84,7 +85,7 @@ func (h *userGroupApi) UpdateUserGroupApi() fiber.Handler {
 
 func (h *userGroupApi) DetailUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req requests.UserGroupDetail
+		var req requests.UserGroupDetailReq
 		if err := c.BodyParser(&req); err != nil {
 			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
 		}
@@ -109,22 +110,31 @@ func (h *userGroupApi) DetailUserGroupApi() fiber.Handler {
 
 func (h *userGroupApi) DeleteUserGroupApi() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		var req requests.UserGroupDetail
+		var req requests.UserGroupDeleteReq
+
 		if err := c.BodyParser(&req); err != nil {
-			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request body"})
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"details": fiber.Map{"msg": "Invalid request body"}})
 		}
 
-		if validationErr := req.Validation(c.Context()); validationErr != nil {
+		if validationErr := req.Validation(); validationErr != nil {
 			return core.ReturnErrsForApi(c, validationErr)
 		}
 
-		err := h.userGroupApiUsc.DeleteApiUserGroupUsc(req.ID)
-		if err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+		for _, idStr := range req.Ids {
+			id, err := strconv.ParseInt(idStr, 10, 64)
+			if err != nil {
+				return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"details": fiber.Map{"msg": "Invalid ID format"}})
+			}
+			err = h.userGroupApiUsc.DeleteApiUserGroupUsc(id)
+			if err != nil {
+				return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"details": fiber.Map{"msg": err.Error()}})
+			}
 		}
 
 		return c.JSON(fiber.Map{
-			"message": "User group deleted successfully",
+			"data": fiber.Map{
+				"msg": "User group(s) deleted successfully",
+			},
 		})
 	}
 }

@@ -162,7 +162,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\" rel=\"stylesheet\" type=\"text/css\"></head><body><div id=\"layout-wrapper\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\" rel=\"stylesheet\" type=\"text/css\"></head><body><!--preloader--><div id=\"preloader\" style=\"opacity: 0; visibility: hidden;\"><div id=\"status\"><div class=\"spinner-border text-primary avatar-sm\" role=\"status\"><span class=\"visually-hidden\">Loading...</span></div></div></div><div id=\"layout-wrapper\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -197,7 +197,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/js/jquery-3.7.0.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 48, Col: 84}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 57, Col: 84}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
@@ -210,7 +210,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var12 string
 		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/bootstrap/js/bootstrap.bundle.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 49, Col: 103}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 58, Col: 103}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 		if templ_7745c5c3_Err != nil {
@@ -223,7 +223,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/simplebar/simplebar.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 50, Col: 93}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 59, Col: 93}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 		if templ_7745c5c3_Err != nil {
@@ -236,7 +236,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/node-waves/waves.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 51, Col: 90}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 60, Col: 90}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var14)
 		if templ_7745c5c3_Err != nil {
@@ -249,7 +249,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/feather-icons/feather.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 52, Col: 95}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 61, Col: 95}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 		if templ_7745c5c3_Err != nil {
@@ -262,7 +262,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/js/pages/plugins/lord-icon-2.1.0.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 53, Col: 97}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 62, Col: 97}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var16)
 		if templ_7745c5c3_Err != nil {
@@ -275,7 +275,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/toastify/toastify-js.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 54, Col: 90}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 63, Col: 90}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var17)
 		if templ_7745c5c3_Err != nil {
@@ -288,7 +288,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var18 string
 		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/choices.js/public/assets/scripts/choices.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 55, Col: 114}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 64, Col: 114}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
 		if templ_7745c5c3_Err != nil {
@@ -301,7 +301,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/libs/sweetalert2/sweetalert2.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 56, Col: 97}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 65, Col: 97}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 		if templ_7745c5c3_Err != nil {
@@ -314,7 +314,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/js/pages/sweetalerts.init.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 57, Col: 90}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 66, Col: 90}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var20)
 		if templ_7745c5c3_Err != nil {
@@ -327,7 +327,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var21 string
 		templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/htmx/htmx.min.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 58, Col: 71}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 67, Col: 71}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var21)
 		if templ_7745c5c3_Err != nil {
@@ -340,7 +340,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/js/common/sidebar-navigation.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 59, Col: 100}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 68, Col: 100}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var22)
 		if templ_7745c5c3_Err != nil {
@@ -353,7 +353,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var23 string
 		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/themes/js/app.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 60, Col: 71}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 69, Col: 71}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var23)
 		if templ_7745c5c3_Err != nil {
@@ -366,7 +366,7 @@ func Master(head *[]templ.Component, script ...templ.Component) templ.Component 
 		var templ_7745c5c3_Var24 string
 		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.ResolveAttributeValue(templates.AssetURL("/static/js/common/utils.js"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 61, Col: 73}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layouts/master.templ`, Line: 70, Col: 73}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var24)
 		if templ_7745c5c3_Err != nil {

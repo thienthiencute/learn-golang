@@ -28,8 +28,19 @@ func MapperListUserGroup(data *[]entity.UserGroup) *[]responses.UserGroupResp {
 			Description: userGroup.Description,
 			Status:      status,
 			Custom: `
-                        <a href="/admins/users-group/update/` + str + `" class="btn btn-sm btn-info edit-btn">Sửa</a>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="` + str + `">Xóa</button>
+                    <ul class="list-inline hstack gap-2 mb-0 d-flex">
+
+                        <li class="list-inline-item item_edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Chỉnh sửa" data-key="t-edit">
+                            <a class="edit-item-btn" href="/admins/users-group/update/` + str + `">
+                                <i class="ri-pencil-fill align-bottom"></i>
+                            </a>
+                        </li>    
+                        <li class="list-inline-item item_delete" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Xóa" data-key="t-delete">
+                            <a id="delete-item-btn" href="#delete_modal" class="text-danger" data-bs-toggle="modal">
+                                <i class="ri-delete-bin-5-fill align-bottom"></i>
+                            </a>
+                        </li>   
+                    </ul>
                     `,
 		})
 

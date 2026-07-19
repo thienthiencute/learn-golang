@@ -1,5 +1,6 @@
 import Alert from "../../components/alert.js"
-import {handleAjaxError} from "/static/js/common/helpers.js"
+import { handleAjaxError, ischeckboxcheck } from "/static/js/common/helpers.js"
+import { checkBtnDatatable } from "/static/js/components/templates.js"
 
 $(document).ready(function () {
     $('#user_group_table').DataTable({
@@ -11,26 +12,22 @@ $(document).ready(function () {
                 if (!response.data) {
                     return [];
                 }
-
-                // var $firstRowData = response.data[0];
-                // detailUser($firstRowData);
                 return response.data;
             }
         },
         columns: [
+            {
+                render: function (data, type, row) {
+                    return checkBtnDatatable(row.id)
+                }
+            },
+            { data: 'custom' },
             { data: 'id' },
             { data: 'name' },
             { data: 'description' },
             { data: 'status' },
-            { data: 'custom' },
-            // {
-            //     render: function (data, type, row) {
-            //         return `
-            //             <button class="btn btn-sm btn-info edit-btn" data-id="${row.id}">Edit</button>
-            //             <button class="btn btn-sm btn-danger delete-btn" data-id="${row.id}">Delete</button>
-            //         `;
-            //     }
-            // }
+
+
         ]
     });
 
@@ -40,7 +37,7 @@ $(document).ready(function () {
         var formData = {
             name: $('#groupName').val(),
             description: $('#groupDesc').val(),
-            status: $('#groupStatus').is(':checked') ? 1 : 2
+            status: parseInt($('input[name="status"]:checked').val() || 1)
         };
 
         // Validate basic required fields
@@ -68,5 +65,31 @@ $(document).ready(function () {
                 handleAjaxError(xhr)
             }
         });
+    });
+
+    // checkAll
+    var checkAll = document.getElementById("checkAll");
+
+    if (checkAll) {
+        checkAll.onclick = function () {
+            var checkboxes = document.querySelectorAll('.form-check-all input[type="checkbox"]');
+            var checkedCount = document.querySelectorAll('.form-check-all input[type="checkbox"]:checked').length;
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = this.checked;
+
+                if (checkboxes[i].checked) {
+                    checkboxes[i].closest("tr").classList.add("table-active");
+                } else {
+                    checkboxes[i].closest("tr").classList.remove("table-active");
+                }
+            }
+            document.getElementById("remove-actions").style.display = checkedCount > 0 ? "none" : "block";
+        };
+    }
+
+    $("#user_group_table").on('click', function (evt) {
+        ischeckboxcheck();
+
     });
 });

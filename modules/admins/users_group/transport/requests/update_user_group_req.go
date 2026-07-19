@@ -11,7 +11,7 @@ import (
 	"gocas/modules/admins/users_group/transport/rules"
 )
 
-type UserGroupUpdate struct {
+type UserGroupUpdateReq struct {
 	ID          int    `json:"id" validate:"required"`
 	Name        string `json:"name" validate:"required"`
 	Description string `json:"description" validate:"required"`
@@ -19,7 +19,7 @@ type UserGroupUpdate struct {
 	StatusStr   string `json:"-"`
 }
 
-func (req *UserGroupUpdate) Validation(ctx context.Context) []*string {
+func (req *UserGroupUpdateReq) Validation(ctx context.Context) []*string {
 	validation := validator.New()
 	validation.RegisterValidation("ruleStatusUserGroupCreate", rules.RuleStatusUserGroupCreate)
 	err := validation.Struct(req)

@@ -28,6 +28,15 @@ templ Master(head *[]templ.Component, script ...templ.Component){
             <link href={templates.AssetURL("/static/themes/css/custom.min.css")} rel="stylesheet" type="text/css" />
         </head>
         <body>
+            <!--preloader-->
+            <div id="preloader" style="opacity: 0; visibility: hidden;">
+                <div id="status">
+                    <div class="spinner-border text-primary avatar-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            
             <div id="layout-wrapper">
 
                 @Header()

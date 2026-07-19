@@ -7,14 +7,15 @@ import (
 )
 
 templ Index(){
-	@layouts.Master(&[]templ.Component{head()}, scriptSlot()){
+@layouts.Master(&[]templ.Component{head()}, scriptSlot()){
 <div class="row">
 	<div class="col-12">
 		<div class="page-title-box d-sm-flex align-items-center justify-content-between">
 			<h4 data-key="t-admin">Admin</h4>
 			<div class="page-title-right">
 				<ol class="breadcrumb m-0">
-					<li class="breadcrumb-item"><a href="javascript: void(0);" data-key="t-users-group">Users Group</a></li>
+					<li class="breadcrumb-item"><a href="javascript: void(0);" data-key="t-users-group">Users Group</a>
+					</li>
 					<li class="breadcrumb-item active" data-key="t-list">List</li>
 				</ol>
 			</div>
@@ -26,15 +27,23 @@ templ Index(){
 	<div class="col-xxl-9">
 		<div class="col-lg-12">
 			<div class="card" id="userGroupList">
-				<div class="w-100 card-body border-end-0 border-start-0 d-lg-flex align-items-center justify-content-between">
+				<div
+					class="w-100 card-body border-end-0 border-start-0 d-lg-flex align-items-center justify-content-between">
 					<div class="row align-items-center gy-3 w-100">
 						<div class="col-sm">
 							<h5 class="card-title mb-0" data-key="t-user-group-list">User Group List</h5>
 						</div>
+						
 						<div class="col-sm-auto d-lg-flex gap-2 align-items-center justify-content-center">
+						<button class="btn btn-danger" id="remove-actions"
+								data-url={templates.AssetURL("/api/admins/users-group/delete")} data-bs-toggle="modal"
+								data-bs-target="#delete_modal">
+								<i class="ri-delete-bin-2-line"></i>
+							</button>
 							<button type="button" class="btn btn-secondary add-btn" data-bs-toggle="modal"
-								data-bs-target="#create_user_group_modal" id="create-btn"><i class="mdi mdi-plus"></i><span
-									data-key="t-add-user-group">Add User Group</span></button>
+								data-bs-target="#create_user_group_modal" id="create-btn"><i
+									class="mdi mdi-plus"></i><span data-key="t-add-user-group">Add User
+									Group</span></button>
 						</div>
 					</div>
 				</div>
@@ -46,11 +55,18 @@ templ Index(){
 								data-domain={templates.AssetURL("")} style="min-height: 200px;width:100%">
 								<thead class="table-light text-muted">
 									<tr class="text-uppercase">
+										<th style="width: 20px;">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="checkAll"
+													value="option">
+											</div>
+										</th>
+										<th>Action</th>
 										<th>ID</th>
 										<th>Name</th>
 										<th>Description</th>
 										<th>Status</th>
-										<th>Action</th>
+										
 									</tr>
 								</thead>
 							</table>
@@ -61,10 +77,10 @@ templ Index(){
 		</div>
 	</div>
 </div>
-	
-	@modals.UserGroupCreateModal()
-	@modals.UserGroupDeleteModal()
-	}
+
+@modals.UserGroupCreateModal()
+@modals.UserGroupDeleteModal()
+}
 }
 
 
@@ -74,8 +90,8 @@ templ head(){
 }
 
 templ scriptSlot(){
-<script type="text/javascript" src={ templates.AssetURL("/static/themes/libs/datatables/datatables.min.js") } defer></script>
+<script type="text/javascript" src={ templates.AssetURL("/static/themes/libs/datatables/datatables.min.js") }
+	defer></script>
 <script type="module" src={ templates.AssetURL("/static/js/admins/users_group/list.js") } defer></script>
 <script type="module" src={ templates.AssetURL("/static/js/admins/users_group/delete.js") } defer></script>
 }
-
