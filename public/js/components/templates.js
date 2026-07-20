@@ -83,15 +83,13 @@ function modalNotiUpdateStatus(status, indexRow) {
 function renderAudit(createdBy, createdAt, updatedBy, updatedAt) {
   const created =
     createdBy || createdAt
-      ? `<strong data-key="t-created">Created</strong>: ${createdBy || ""}${
-          createdBy && createdAt ? " - " : ""
-        }${createdAt || ""}`
+      ? `<strong data-key="t-created">Created</strong>: ${createdBy || ""}${createdBy && createdAt ? " - " : ""
+      }${createdAt || ""}`
       : "";
   const updated =
     updatedBy || updatedAt
-      ? `</br><strong data-key="t-updated">Updated</strong>: ${
-          updatedBy || ""
-        }${updatedBy && updatedAt ? " - " : ""}${updatedAt || ""}`
+      ? `</br><strong data-key="t-updated">Updated</strong>: ${updatedBy || ""
+      }${updatedBy && updatedAt ? " - " : ""}${updatedAt || ""}`
       : "";
   return created + updated;
 }
@@ -150,15 +148,13 @@ function renderOrderNumber(row, link = "/ecommerce/orders/edit/") {
 
   return `
     <div class="d-flex align-items-center gap-1">
-      <a class="${
-        row.cancelled_status == "cancelled" ? "text-danger" : ""
-      }" href="${link}${row.id}">
+      <a class="${row.cancelled_status == "cancelled" ? "text-danger" : ""
+    }" href="${link}${row.id}">
         ${row.order_number}
       </a>
 
-      ${
-        isVerified
-          ? `
+      ${isVerified
+      ? `
             <div>
               <i class="ri-check-line me-1 align-bottom text-success fs-5 fw-bold"
               data-bs-toggle="tooltip"
@@ -167,12 +163,11 @@ function renderOrderNumber(row, link = "/ecommerce/orders/edit/") {
               title="Đã xác thực"></i>
             </div>
           `
-          : ""
-      }
+      : ""
+    }
 
-      ${
-        row.is_delivery_ready
-          ? `
+      ${row.is_delivery_ready
+      ? `
             <i
               class="ri-truck-line text-success fs-5"
               data-bs-toggle="tooltip"
@@ -181,7 +176,7 @@ function renderOrderNumber(row, link = "/ecommerce/orders/edit/") {
               title="Đủ thông tin để tạo giao hàng"
             ></i>
           `
-          : `
+      : `
             <i
               class="ri-truck-line text-warning fs-5"
               data-bs-toggle="tooltip"
@@ -190,7 +185,7 @@ function renderOrderNumber(row, link = "/ecommerce/orders/edit/") {
               title="Thiếu thông tin giao hàng"
             ></i>
           `
-      }
+    }
     </div>
   `;
 }
@@ -206,16 +201,16 @@ function renderCategoriesSync(categories, isCatePan, prdID) {
 
   const categoryHtml = hasCategories
     ? categories
-        .map(function (category) {
-          return `
+      .map(function (category) {
+        return `
             <a href="#" 
                class="fw-medium link-secondary category_item" 
                data-cate="${category.id}">
               ${category.name}
             </a>
           `;
-        })
-        .join(", ")
+      })
+      .join(", ")
     : `<span class="text-muted">Không có danh mục</span>`;
 
   const checkBtn = hasCategories

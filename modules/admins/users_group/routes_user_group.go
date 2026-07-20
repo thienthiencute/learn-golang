@@ -8,14 +8,14 @@ import (
 )
 
 func SetupRoutesUserGroup(app *fiber.App, serviceCtx gosctx.ServiceContext) {
-	groupHdl := app.Group("/admins/users-group")
+	groupHdl := app.Group("/admins/roles")
 	{
 		comp := composers.ComposerUserGroupHdlService(serviceCtx)
 		groupHdl.Get("/list", comp.ListUserGroupHdl()).Name("ecommerce.users_group.list")
 		groupHdl.Get("/update/:id", comp.UpdateUserGroupHdl()).Name("ecommerce.users_group.update")
 	}
 
-	groupApi := app.Group("/api/admins/users-group")
+	groupApi := app.Group("/api/admins/roles")
 	{
 		comp := composers.ComposerUserGroupApiService(serviceCtx)
 		groupApi.Post("/list", comp.ListUserGroupApi()).Name("ecommerce.users_group.api.list")

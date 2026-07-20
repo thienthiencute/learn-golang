@@ -4,6 +4,7 @@ import (
 "gocas/views/layouts"
 "gocas/pkg/golangviet/templates"
 "gocas/views/admins/users_group/components/modals"
+	"gocas/modules/admins/common/consts"
 )
 
 templ Index(){
@@ -36,7 +37,7 @@ templ Index(){
 						
 						<div class="col-sm-auto d-lg-flex gap-2 align-items-center justify-content-center">
 						<button class="btn btn-danger" id="remove-actions"
-								data-url={templates.AssetURL("/api/admins/users-group/delete")} data-bs-toggle="modal"
+								data-url={templates.AssetURL("/api/admins/roles/delete")} data-bs-toggle="modal"
 								data-bs-target="#delete_modal">
 								<i class="ri-delete-bin-2-line"></i>
 							</button>
@@ -77,9 +78,11 @@ templ Index(){
 		</div>
 	</div>
 </div>
-
-@modals.UserGroupCreateModal()
-@modals.UserGroupDeleteModal()
+<div>
+			@modals.UserGroupCreateModal()
+			@modals.UserGroupDeleteModal()
+</div>
+		<input type="hidden" id="status_list" value={ templates.JsonString(consts.StatusUserToViewCreateString) }/>
 }
 }
 
@@ -90,6 +93,7 @@ templ head(){
 }
 
 templ scriptSlot(){
+
 <script type="text/javascript" src={ templates.AssetURL("/static/themes/libs/datatables/datatables.min.js") }
 	defer></script>
 <script type="module" src={ templates.AssetURL("/static/js/admins/users_group/list.js") } defer></script>

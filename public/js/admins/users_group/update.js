@@ -1,5 +1,5 @@
 import Alert from "../../components/alert.js";
-import {handleAjaxError} from "/static/js/common/helpers.js"
+import { handleAjaxError } from "/static/js/common/helpers.js"
 
 $(document).ready(function () {
     // Handle Save button click
@@ -20,18 +20,18 @@ $(document).ready(function () {
 
         // Send AJAX POST request to update API
         $.ajax({
-            url: '/api/admins/users-group/update',
+            url: '/api/admins/roles/update',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (response) {
                 Alert.success('User group updated successfully');
                 setTimeout(() => {
-                    location.href = '/admins/users-group/list';
+                    location.href = '/admins/roles/list';
                 }, 1500);
             },
             error: function (xhr) {
-                  handleAjaxError(xhr)
+                handleAjaxError(xhr)
             }
         });
     });

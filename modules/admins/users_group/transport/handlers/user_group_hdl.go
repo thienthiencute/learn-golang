@@ -4,7 +4,7 @@ import (
 	"gocas/modules/admins/users_group/entity"
 	"gocas/pkg/golangviet/templates"
 	"gocas/views/admins/users_group"
-	"gocas/views/pages"
+	errorpages "gocas/views/pages"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -32,13 +32,13 @@ func (h *userGroupHdl) UpdateUserGroupHdl() fiber.Handler {
 		id, err := c.ParamsInt("id")
 
 		if err != nil || id <= 0 {
-			return templates.Render(c, errorpages.NotFound404("/admins/users-group/list"))
+			return templates.Render(c, errorpages.NotFound404("/admins/roles/list"))
 		}
 
 		detailUserGroup, err := h.userGroupUsc.FindOneUserGroupUsc(id)
 
 		if err != nil {
-			return templates.Render(c, errorpages.NotFound404("/admins/users-group/list"))
+			return templates.Render(c, errorpages.NotFound404("/admins/roles/list"))
 		}
 
 		return templates.Render(c, users_group.Update(detailUserGroup))

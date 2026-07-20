@@ -9,10 +9,10 @@ import (
 
 func RuleStatusUserGroup(fl validator.FieldLevel) bool {
 	status := fl.Field().Interface().(int)
-	return slices.Contains(consts.StatusUserGroupToViewCreate, status)
+	return slices.Contains(consts.StatusUserToViewCreateInt, status)
 }
 
 func RuleStatusUserGroupCreate(fl validator.FieldLevel) bool {
 	status := fl.Field().Interface().(int)
-	return slices.Contains(consts.StatusUserGroupToViewCreate, status)
+	return slices.Contains(consts.StatusUserToViewCreateInt, status)
 }

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"gocas/modules/admins/users_group/entity"
 	"gocas/modules/admins/users_group/transport/requests"
 	"gocas/modules/admins/users_group/transport/responses"
@@ -12,10 +13,10 @@ import (
 
 type userGroupApiUsc interface {
 	ListApiUserGroupUsc() (*[]responses.UserGroupResp, error)
-	CreateApiUserGroupUsc(name, description string, status int) error
-	UpdateApiUserGroupUsc(id int64, name, description string, status int) error
-	DetailApiUserGroupUsc(id int64) (*entity.UserGroup, error)
-	DeleteApiUserGroupUsc(id int64) error
+	CreateApiUserGroupUsc(ctx context.Context, req *requests.UserGroupCreation) error
+	UpdateApiUserGroupUsc(ctx context.Context, req *requests.UserGroupUpdateReq) error
+	DetailApiUserGroupUsc(ctx context.Context, req *requests.UserGroupDetailReq) (*entity.UserGroup, error)
+	DeleteApiUserGroupUsc(ctx context.Context, id int64) error
 }
 
 type userGroupApi struct {
@@ -50,7 +51,7 @@ func (h *userGroupApi) CreateUserGroupApi() fiber.Handler {
 			return core.ReturnErrsForApi(c, validationErr)
 		}
 
-		err := h.userGroupApiUsc.CreateApiUserGroupUsc(req.Name, req.Description, req.Status)
+		err := h.userGroupApiUsc.CreateApiUserGroupUsc(c.UserContext(), &req)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
@@ -72,7 +73,7 @@ func (h *userGroupApi) UpdateUserGroupApi() fiber.Handler {
 			return core.ReturnErrsForApi(c, validationErr)
 		}
 
-		err := h.userGroupApiUsc.UpdateApiUserGroupUsc(int64(req.ID), req.Name, req.Description, req.Status)
+		err := h.userGroupApiUsc.UpdateApiUserGroupUsc(c.UserContext(), &req)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
@@ -94,7 +95,7 @@ func (h *userGroupApi) DetailUserGroupApi() fiber.Handler {
 			return core.ReturnErrsForApi(c, validationErr)
 		}
 
-		data, err := h.userGroupApiUsc.DetailApiUserGroupUsc(req.ID)
+		data, err := h.userGroupApiUsc.DetailApiUserGroupUsc(c.UserContext(), &req)
 		if err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 		}
@@ -125,7 +126,7 @@ func (h *userGroupApi) DeleteUserGroupApi() fiber.Handler {
 			if err != nil {
 				return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"details": fiber.Map{"msg": "Invalid ID format"}})
 			}
-			err = h.userGroupApiUsc.DeleteApiUserGroupUsc(id)
+			err = h.userGroupApiUsc.DeleteApiUserGroupUsc(c.UserContext(), id)
 			if err != nil {
 				return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"details": fiber.Map{"msg": err.Error()}})
 			}

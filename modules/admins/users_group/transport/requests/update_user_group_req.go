@@ -40,7 +40,7 @@ func (req *UserGroupUpdateReq) Validation(ctx context.Context) []*string {
 		return validationErrors
 	}
 
-	req.StatusStr = consts.MapStatusUserGroup[req.Status]
+	req.StatusStr = consts.MapStatusIntToString[req.Status]
 
 	req.Name = strings.TrimSpace(req.Name)
 	req.Description = strings.TrimSpace(req.Description)

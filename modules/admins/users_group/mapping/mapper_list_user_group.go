@@ -1,6 +1,7 @@
 package mapping
 
 import (
+	"gocas/modules/admins/common/consts"
 	"gocas/modules/admins/users_group/entity"
 	"gocas/modules/admins/users_group/transport/responses"
 	"strconv"
@@ -16,9 +17,9 @@ func MapperListUserGroup(data *[]entity.UserGroup) *[]responses.UserGroupResp {
 		// 	status = "An"
 		// }
 
-		status := "Hien"
-		if userGroup.Status == 2 {
-			status = "An"
+		statusStr, ok := consts.MapStatusIntToString[userGroup.Status]
+		if !ok {
+			statusStr = consts.STATUS_ACTIVE_STR
 		}
 
 		str := strconv.FormatInt(userGroup.ID, 10)
@@ -26,12 +27,12 @@ func MapperListUserGroup(data *[]entity.UserGroup) *[]responses.UserGroupResp {
 			ID:          userGroup.ID,
 			Name:        userGroup.Name,
 			Description: userGroup.Description,
-			Status:      status,
+			Status:      statusStr,
 			Custom: `
                     <ul class="list-inline hstack gap-2 mb-0 d-flex">
 
                         <li class="list-inline-item item_edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Chỉnh sửa" data-key="t-edit">
-                            <a class="edit-item-btn" href="/admins/users-group/update/` + str + `">
+                            <a class="edit-item-btn" href="/admins/roles/update/` + str + `">
                                 <i class="ri-pencil-fill align-bottom"></i>
                             </a>
                         </li>    
