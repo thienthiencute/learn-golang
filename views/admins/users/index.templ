@@ -1,11 +1,14 @@
 package users
 
 import (
-"gocas/views/layouts"
-"gocas/pkg/golangviet/templates"
+	"gocas/modules/admins/common/consts"
+	"gocas/modules/admins/users/entity"
+	"gocas/pkg/golangviet/templates"
+	"gocas/views/layouts"
+	"gocas/views/admins/users/components/modals"
 )
 
-templ Index(){
+templ Index(roles []entity.Role){
 @layouts.Master(&[]templ.Component{head()}, scriptSlot()){
 <div class="row">
 	<div class="col-12">
@@ -25,6 +28,7 @@ templ Index(){
 	<div class="col-xxl-9">
 		<div class="col-lg-12">
 			<div class="card" id="orderList">
+				<input type="hidden" id="status_list" value={ templates.JsonString(consts.StatusUserToViewCreateString) }/>
 				<div
 					class="w-100 card-body border-end-0 border-start-0 d-lg-flex align-items-center justify-content-between">
 					<div class="row align-items-center gy-3 w-100">
@@ -58,9 +62,10 @@ templ Index(){
 										</th>
 										<th data-key="t-action">Action</th>
 										<th class="text-left">NO.</th>
-										<th>Avatar</th>
 										<th data-key="t-fullname">Full name</th>
+										<th data-key="t-role">Role</th>
 										<th data-key="t-status">Status</th>
+										<th data-key="t-audit-info">Audit Info</th>
 									</tr>
 								</thead>
 							</table>
@@ -70,10 +75,17 @@ templ Index(){
 			</div>
 		</div>
 	</div>
-
 	// @components.InfoUserRight()
 
 </div>
+
+<div>
+	@modals.UserDeleteModal()
+	@modals.UserCreateModal(roles)
+</div>
+
+<input type="hidden" id="status_list" value={ templates.JsonString(consts.StatusUserToViewCreateString) }/>
+<div id="update_status_html"></div>
 
 }
 }
@@ -89,4 +101,5 @@ templ scriptSlot(){
 <script type="module" src={templates.AssetURL("/static/js/admins/users/list.js")}></script>
 //
 <script type="module" src={templates.AssetURL("/static/js/admins/users/create.js")}></script>
+<script type="module" src={templates.AssetURL("/static/js/admins/users/delete.js")}></script>
 }

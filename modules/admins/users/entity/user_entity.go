@@ -25,9 +25,18 @@ type User struct {
 	RoleFake     *core.UID       `json:"role_id" gorm:"-"`
 	CreatedBy    int64           `json:"created_by"`
 	UpdatedBy    int64           `json:"updated_by"`
-	// Role         *Role           `gorm:"foreignKey:RoleID"`
+	Role         *Role           `gorm:"foreignKey:RoleID"`
 	UserCreated  *User           `gorm:"foreignKey:CreatedBy"`
 	UserUpdated  *User           `gorm:"foreignKey:UpdatedBy"`
+}
+
+type Role struct {
+	core.SQLModel
+	Name string `json:"name"`
+}
+
+func (Role) TableName() string {
+	return "admins.users_group"
 }
 
 func (User) TableName() string {

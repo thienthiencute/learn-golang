@@ -12,4 +12,5 @@ var (
 	ErrEmailValidate = errors.New("Error validation Email")
 	ErrStatusNotFound = errors.New("Error validation Status")
 	ErrIDUserValidate = errors.New("Error validation ID")
-)
+	ErrFullNameRoleValidate = errors.New("Vui lòng nhập tên nhóm")
+)

@@ -13,6 +13,7 @@ import (
 
 type composerUserHdl interface {
 	ListUserHdl() fiber.Handler
+	UpdateUserHdl() fiber.Handler
 }
 
 func ComposerUserService(serviceCtx gosctx.ServiceContext) composerUserHdl {

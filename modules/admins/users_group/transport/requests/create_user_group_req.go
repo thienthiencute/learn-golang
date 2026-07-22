@@ -35,7 +35,7 @@ func (req *UserGroupCreation) Validation(ctx context.Context) []*string {
 		for _, vErr := range err.(validator.ValidationErrors) {
 			switch vErr.Field() {
 			case "Name":
-				errName := errs.ErrCreateUserFailed.Error()
+				errName := errs.ErrFullNameRoleValidate.Error()
 				validationErrors = append(validationErrors, &errName)
 			case "Status":
 				errStatus := errs.ErrStatusNotFound.Error()

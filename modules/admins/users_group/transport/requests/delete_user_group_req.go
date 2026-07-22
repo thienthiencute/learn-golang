@@ -1,25 +1,32 @@
 package requests
 
 import (
-	"gocas/modules/admins/common/errs"
+	"context"
 
 	"github.com/go-playground/validator/v10"
+
+	"gocas/modules/admins/common/errs"
 )
 
 type UserGroupDeleteReq struct {
 	Ids []string `json:"ids" validate:"required"`
 }
 
-func (req *UserGroupDeleteReq) Validation() error {
+func (req *UserGroupDeleteReq) Validation(ctx context.Context) []*string {
 	validate := validator.New()
 	err := validate.Struct(req)
+	var validationErrors []*string
 	if err != nil {
-		for _, err := range err.(validator.ValidationErrors) {
-			switch err.Field() {
+		for _, vErr := range err.(validator.ValidationErrors) {
+			switch vErr.Field() {
 			case "Ids":
-				return errs.ErrIDUserValidate
+				errId := errs.ErrIDUserValidate.Error()
+				validationErrors = append(validationErrors, &errId)
 			}
 		}
+	}
+	if validationErrors != nil {
+		return validationErrors
 	}
 	return nil
 }

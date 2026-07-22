@@ -1,0 +1,84 @@
+package users
+
+import (
+	"gocas/views/layouts"
+	"gocas/pkg/golangviet/templates"
+	"gocas/modules/admins/users/entity"
+	"strconv"
+)
+
+templ Update(detailUser *entity.User){
+	@layouts.Master(&[]templ.Component{}, scriptUpdateSlot()){
+<div class="row">
+	<div class="col-12">
+		<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+			<h4 data-key="t-admin">Admin</h4>
+			<div class="page-title-right">
+				<ol class="breadcrumb m-0">
+					<li class="breadcrumb-item"><a href="javascript: void(0);" data-key="t-users">Users</a></li>
+					<li class="breadcrumb-item active" data-key="t-update">Update</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xxl-9">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header align-items-center d-flex">
+					<h4 class="card-title mb-0 flex-grow-1" data-key="t-update-user">Cập nhật User</h4>
+				</div>
+
+				<div class="card-body">
+					<form id="update_user_form">
+						<input type="hidden" id="userId" name="id" value={strconv.FormatInt(detailUser.ID, 10)} />
+						<div class="row gy-4">
+							<div class="col-xxl-6 col-md-6">
+								<div>
+									<label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+									<input type="email" class="form-control" id="email" name="email" required placeholder="Nhập email" value={detailUser.Email} />
+								</div>
+							</div>
+							<div class="col-xxl-6 col-md-6">
+								<div>
+									<label for="firstName" class="form-label">Tên <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="firstName" name="first_name" required placeholder="Nhập tên" value={detailUser.FirstName} />
+								</div>
+							</div>
+							<div class="col-xxl-6 col-md-6">
+								<div>
+									<label for="lastName" class="form-label">Họ <span class="text-danger">*</span></label>
+									<input type="text" class="form-control" id="lastName" name="last_name" required placeholder="Nhập họ" value={detailUser.LastName} />
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<label class="form-label">Trạng thái <span class="text-danger">*</span></label>
+								<div class="mt-lg-0 mt-2">
+									<div class="form-check form-check-inline form-radio-secondary mb-2">
+										<input class="form-check-input" type="radio" name="status" id="userStatusActive" value="1" checked?={detailUser.Status == 1} />
+										<label class="form-check-label text-capitalize" for="userStatusActive" data-key="t-active">Hiện</label>
+									</div>
+									<div class="form-check form-check-inline mb-2">
+										<input class="form-check-input" type="radio" name="status" id="userStatusInactive" value="2" checked?={detailUser.Status != 1} />
+										<label class="form-check-label text-capitalize" for="userStatusInactive" data-key="t-inactive">Ẩn</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="mt-4">
+							<button type="submit" class="btn btn-success" data-key="t-save">Lưu thay đổi</button>
+							<a href="/admins/users/list" class="btn btn-secondary" data-key="t-cancel">Hủy</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	}
+}
+
+templ scriptUpdateSlot(){
+	<script type="module" src={ templates.AssetURL("/static/js/admins/users/update.js") } defer></script>
+}

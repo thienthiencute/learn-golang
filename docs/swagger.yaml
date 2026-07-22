@@ -1,0 +1,192 @@
+definitions:
+  requests.UserGroupCreation:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      status:
+        type: integer
+    required:
+    - description
+    - name
+    - status
+    type: object
+  requests.UserGroupDeleteReq:
+    properties:
+      ids:
+        items:
+          type: string
+        type: array
+    required:
+    - ids
+    type: object
+  requests.UserGroupDetailReq:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  requests.UserGroupUpdateReq:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      status:
+        type: integer
+    required:
+    - description
+    - id
+    - name
+    - status
+    type: object
+  requests.UserGroupUpdateStatusReq:
+    properties:
+      id:
+        type: integer
+      status:
+        type: integer
+    required:
+    - id
+    - status
+    type: object
+info:
+  contact: {}
+paths:
+  /api/admins/roles/create:
+    post:
+      consumes:
+      - application/json
+      description: Tạo mới một nhóm quyền (Role)
+      parameters:
+      - description: Thông tin nhóm quyền
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UserGroupCreation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Tạo mới nhóm quyền
+      tags:
+      - roles
+  /api/admins/roles/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Xóa nhiều nhóm quyền theo mảng ID
+      parameters:
+      - description: Danh sách ID cần xóa
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UserGroupDeleteReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Xóa nhóm quyền
+      tags:
+      - roles
+  /api/admins/roles/detail:
+    post:
+      consumes:
+      - application/json
+      description: Lấy thông tin chi tiết 1 nhóm quyền theo request body (không dùng
+        URL param :id)
+      parameters:
+      - description: ID của nhóm quyền
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UserGroupDetailReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Chi tiết nhóm quyền
+      tags:
+      - roles
+  /api/admins/roles/list:
+    post:
+      consumes:
+      - application/json
+      description: Lấy danh sách tất cả các nhóm quyền
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Danh sách nhóm quyền
+      tags:
+      - roles
+  /api/admins/roles/update:
+    post:
+      consumes:
+      - application/json
+      description: Cập nhật toàn bộ thông tin 1 nhóm quyền (name, description, status)
+      parameters:
+      - description: Thông tin cập nhật nhóm quyền
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UserGroupUpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Cập nhật nhóm quyền
+      tags:
+      - roles
+  /api/admins/roles/update-status:
+    patch:
+      consumes:
+      - application/json
+      description: Chỉ cập nhật riêng field status (kích hoạt/vô hiệu hóa nhóm quyền)
+      parameters:
+      - description: Trạng thái mới
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UserGroupUpdateStatusReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Cập nhật trạng thái nhóm quyền
+      tags:
+      - roles
+swagger: "2.0"

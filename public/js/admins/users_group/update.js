@@ -13,10 +13,10 @@ $(document).ready(function () {
         };
 
         // Validate basic required fields
-        if (!formData.name) {
-            Alert.error('Name is required!');
-            return;
-        }
+        // if (!formData.name) {
+        //     Alert.error('Name is required!');
+        //     return;
+        // }
 
         // Send AJAX POST request to update API
         $.ajax({
@@ -26,9 +26,6 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             success: function (response) {
                 Alert.success('User group updated successfully');
-                setTimeout(() => {
-                    location.href = '/admins/roles/list';
-                }, 1500);
             },
             error: function (xhr) {
                 handleAjaxError(xhr)

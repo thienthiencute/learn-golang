@@ -7,15 +7,9 @@ import (
 	"strconv"
 )
 
-func MapperListUserGroup(data *[]entity.UserGroup) *[]responses.UserGroupResp {
+func MapperListUserGroup(data []*entity.UserGroup) *[]responses.UserGroupResp {
 	var result []responses.UserGroupResp
-	for _, userGroup := range *data {
-		// status := ""
-		// if userGroup.Status == 1 {
-		// 	status = "Hien"
-		// } else{
-		// 	status = "An"
-		// }
+	for _, userGroup := range data {
 
 		statusStr, ok := consts.MapStatusIntToString[userGroup.Status]
 		if !ok {
@@ -47,7 +41,18 @@ func MapperListUserGroup(data *[]entity.UserGroup) *[]responses.UserGroupResp {
 
 	}
 
-	//
-
 	return &result
+}
+
+func MapperDetailUserGroup(data *entity.UserGroup) *responses.DetailUserGroupResp {
+	if data == nil {
+		return nil
+	}
+	return &responses.DetailUserGroupResp{
+		ID:          data.ID,
+		Name:        data.Name,
+		Description: data.Description,
+		Status:      data.Status,
+		Permission:  data.Permission,
+	}
 }

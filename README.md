@@ -237,3 +237,56 @@ Giờ đây bạn có thể vào sửa giao diện HTML tại `views/users/index
 ## Quy trình chạy code 
 
 đầu tiên chạy make server thì đi vô file Makefile, sau đó vô file main.go, sau đó main đi vô root.go, sau đó root.go đi vô init trước, vô init thì có server.go, server.go nó gọi vô routes_server.go, sau đó nó sẽ gọi vô file routes_user_group.go, khai báo composer rồi sau đó vô transport, rồi nhảy vô handler hoặc là api, sau đó nó vô usecase của handler hoặc api, sau đó đi vô repository, sau đó đi qua entity, sau đó nó vô database để lấy dữ liệu 
+
+---
+
+## 📖 Hướng dẫn sử dụng Swagger (Tài liệu API)
+
+Dự án đã được tích hợp **Swagger** (thông qua `swaggo/swag` và `gofiber/swagger`) để tự động sinh tài liệu API và cung cấp giao diện test trực tiếp.
+
+### 1. Truy cập Swagger UI
+- Đảm bảo server đang chạy (`make server`).
+- Mở trình duyệt và truy cập: **http://localhost:3007/swagger/index.html**
+
+### 2. Công thức viết Docs (Annotation) cho API
+Để tài liệu tự động cập nhật, bạn cần viết comment (bắt đầu bằng `//`) ngay phía trên hàm xử lý API (Handler). Dưới đây là các thẻ (tags) quan trọng nhất:
+
+- `// @Summary`: Tiêu đề ngắn gọn của API (in đậm).
+- `// @Description`: Mô tả chi tiết API làm gì.
+- `// @Tags`: Dùng để gom nhóm các API (vd: `roles`, `users`).
+- `// @Accept` & `// @Produce`: Định dạng request gửi lên và response trả về (thường là `json`).
+- `// @Param`: Định nghĩa dữ liệu truyền lên. Cú pháp: `// @Param <tên> <nơi_gửi> <kiểu> <bắt_buộc> "Mô tả"`.
+  - Body (JSON): `// @Param request body requests.UserGroupCreation true "Dữ liệu tạo nhóm"`
+  - Path URL: `// @Param id path int true "ID cần sửa"`
+  - Query: `// @Param page query int false "Trang hiện tại"`
+- `// @Success`: Định nghĩa dữ liệu trả về khi thành công. Cú pháp: `// @Success <mã_HTTP> {object} <kiểu_dữ_liệu>`
+  - Trả về Struct thật (Khuyên dùng): `// @Success 200 {object} responses.DetailUserGroupResp`
+  - Trả về chung chung: `// @Success 200 {object} map[string]interface{}`
+- `// @Router`: Đường dẫn và HTTP method. Cú pháp: `// @Router <đường_dẫn_đầy_đủ> [<phương_thức>]`
+  - Ví dụ: `// @Router /api/admins/roles/update-status [patch]`
+
+**💡 MẪU HOÀN CHỈNH CHO MỘT API:**
+```go
+// GetUser godoc
+// @Summary      Lấy thông tin User
+// @Description  Trả về thông tin chi tiết của user dựa vào ID
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "ID của User"
+// @Param        type query     string false "Loại user"
+// @Success      200  {object}  responses.UserResp
+// @Failure      404  {object}  map[string]interface{}
+// @Router       /api/admins/users/{id} [get]
+func (h *userApi) GetUser() fiber.Handler {
+   // ... code xử lý ...
+}
+```
+
+### 3. Cập nhật lại Docs sau khi sửa code
+Sau khi bạn thêm hoặc sửa bất kỳ comment Swagger nào, bạn **BẮT BUỘC** phải làm theo 2 bước sau để giao diện cập nhật:
+1. Mở terminal ở thư mục gốc (chứa `main.go`) và chạy lệnh sinh docs:
+   ```bash
+   swag init
+   ```
+2. Khởi động lại server (`make server`) để Fiber load lại file docs mới.

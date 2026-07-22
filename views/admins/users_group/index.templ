@@ -43,11 +43,12 @@ templ Index(){
 							</button>
 							<button type="button" class="btn btn-secondary add-btn" data-bs-toggle="modal"
 								data-bs-target="#create_user_group_modal" id="create-btn"><i
-									class="mdi mdi-plus"></i><span data-key="t-add-user-group">Add User
+									class="mdi mdi-plus"></i><span data-key="t-add-role">Add User
 									Group</span></button>
 						</div>
 					</div>
 				</div>
+				<input type="text" name="" id="search_box" value="" placeholder="Tim theo ten">
 
 				<div class="card-body pt-2">
 					<div>
@@ -83,6 +84,7 @@ templ Index(){
 			@modals.UserGroupDeleteModal()
 </div>
 		<input type="hidden" id="status_list" value={ templates.JsonString(consts.StatusUserToViewCreateString) }/>
+		<div id="update_status_html"></div>
 }
 }
 

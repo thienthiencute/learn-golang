@@ -11,7 +11,16 @@ import (
 	"github.com/teoit/gosctx/component/gormc"
 	"github.com/teoit/gosctx/component/redisc"
 	"github.com/teoit/gosctx/configs"
+
+	_ "gocas/docs" // swagger docs
+	"github.com/gofiber/swagger"
 )
+
+// @title Hệ thống CRM API
+// @version 1.0
+// @description API server cho module quản trị.
+// @host localhost:3007
+// @BasePath /
 
 var (
 	serviceName = "server-service"
@@ -52,6 +61,9 @@ var ServerCmd = &cobra.Command{
 		appFiber.Get("/", func(c *fiber.Ctx) error {
 			return c.SendString("Hello server")
 		})
+
+		// Đăng ký route cho Swagger
+		appFiber.Get("/swagger/*", swagger.HandlerDefault)
 
 		internal.RoutesServer(appFiber, serviceCtx)
 
